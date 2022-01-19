@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Spill</title>
+    <link rel="stylesheet" href="prøven.css">
+</head>
+<body>
+<div id="hoved">
+    <h1> Gjett byen</h1>
+    <label for="tittel">Skriv inn en bokstav</label>
+    <input type="text" id="tittel" placeholder="svar">
+   <div id="gjett"> <button> Registrer</button> </div>
+    <p id="info"> Løsningsordet har 6 bokstaver. </p>
+    <p class="gronn" id="1">Forsøk 1</p>
+    <p class="gronn" id="2">Forsøk 2</p>
+    <p class="gronn" id="3">Forsøk 3</p>
+    <p class="gronn" id="4">Forsøk 4</p>
+    <p class="gronn" id="5">Forsøk 5</p>
+    <p class="gronn" id="6">Forsøk 6</p>
+    <p class="avsnitt2"> </p>
+
+
+</div>
+
+</body>
+<script>
+
+    var losning=[]
+    losning[0]="B"
+    losning[1]="e"
+    losning[2]="r"
+    losning[3]="g"
+    losning[4]="e"
+    losning[5]="n"
+    var antallGanger=0;
+    let riktigeBokstaver=[]
+    var antallTrykk=0;
+
+    var gjettedeBokstaver=[]
+    document.querySelector("#gjett").onclick=kontrollere;
+    function kontrollere() {
+        antallTrykk++;
+        let infoEl = document.querySelector("p");
+        if (antallTrykk===6) {
+            let avsnitt2El = document.querySelector(".avsnitt2");
+            avsnitt2El.innerHTML = "Spillet er over!"
+        }
+
+        antallGanger++;
+        document.getElementById(antallGanger).style.color="red";
+        let gjettetBokstav=document.getElementById("tittel").value;
+        gjettedeBokstaver.push(gjettetBokstav);
+        for (var i = 0; i < losning.length; i++)
+            if (gjettetBokstav===losning[i]) {
+                riktigeBokstaver[i]=gjettetBokstav;
+                document.getElementById(antallGanger).style.color="green";
+
+            }
+        infoEl.innerHTML = "Løsningsordet har 6 bokstaver.  " +
+            "Du har gjettet " + antallTrykk + " bokstaver som er: "+gjettedeBokstaver.sort().join("")+"<br>"+
+            "Riktige bokstaver så langt: "+riktigeBokstaver.join("")
+        }
+
+
+
+</script>
+</html>
